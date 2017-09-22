@@ -3,7 +3,6 @@ using System.Linq;
 
 public class Game {
 	char[] _board = {
-        ' ',
     	'1', '2', '3',
     	'4', '5', '6',
     	'7', '8', '9'
@@ -26,7 +25,7 @@ public class Game {
 			var choice = int.Parse(Console.ReadLine());
 			while (choice > 9 || choice < 0) {
 				Console.WriteLine("That is an invalid number, please try again: ");
-				choice = int.Parse(Console.ReadLine());
+				choice = int.Parse(Console.ReadLine()) - 1;
 			}
 			if (!_playerSymbols.Contains(_board[choice])) {
 				_board[choice] = _playerSymbols[_currentPlayer];
@@ -53,39 +52,40 @@ public class Game {
 
 	void DrawBoard(char[] board) {
 		Console.WriteLine("   |   |  ");
-		Console.WriteLine(" {0} | {1} | {2}", board[1], board[2], board[3]);
+		Console.WriteLine(" {0} | {1} | {2}", board[0], board[1], board[2]);
 		Console.WriteLine("___|___|___");
 		Console.WriteLine("   |   |  ");
-		Console.WriteLine(" {0} | {1} | {2}", board[4], board[5], board[6]);
+		Console.WriteLine(" {0} | {1} | {2}", board[3], board[4], board[5]);
 		Console.WriteLine("___|___|___");
 		Console.WriteLine("   |   |  ");
-		Console.WriteLine(" {0} | {1} | {2}", board[7], board[8], board[9]);
+		Console.WriteLine(" {0} | {1} | {2}", board[6], board[7], board[8]);
 		Console.WriteLine("   |   |  ");
 	}
 
 	private int CheckGameOver(char[] board) {
 		// Check rows
-		if ((board[1] == board[2] && board[2] == board[3]) ||
-			(board[4] == board[5] && board[5] == board[6]) ||
-			(board[7] == board[8] && board[8] == board[9]))
+		if (AllEqual(board[0], board[1], board[2]) || 
+			AllEqual(board[3], board[4], board[5]) || 
+			AllEqual(board[6], board[7], board[8])) 
 			return 1;
 
 		// Check columns
-		if ((board[1] == board[4] && board[4] == board[7]) ||
-		   (board[2] == board[5] && board[5] == board[8]) ||
-		   (board[3] == board[6] && board[6] == board[9]))
+		if (AllEqual(board[0], board[3], board[6]) ||
+			AllEqual(board[1], board[4], board[7]) ||
+			AllEqual(board[2], board[5], board[8]))
 			return 1;
 
 		// Check Diagonals
-		if ((board[1] == board[5] && board[5] == board[9]) ||
-			(board[3] == board[5] && board[5] == board[7]))
+		if (AllEqual(board[0], board[4], board[8]) ||
+			AllEqual(board[2], board[3], board[6]))
 			return 1;
 
 		// Check For Draw
-		if (board[1] != '1' && board[2] != '2' && board[3] != '3' && board[4] != '4' && board[5] != '5' && board[6] != '6' && board[7] != '7' && board[8] != '8' && board[9] != '9')
-			return -1;
+		return board.Any(c => !_playerSymbols.Contains(c)) ? 0 : -1;
+	}
 
-		return 0;
+	private bool AllEqual(int a, int b, int c) {
+		return a == b && b == c;
 	}
 }
 
