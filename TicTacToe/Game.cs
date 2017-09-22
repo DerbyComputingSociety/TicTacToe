@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 public class Game {
 	char[] _board = {
@@ -13,26 +14,21 @@ public class Game {
     public void Run() {
         int flag = 0;
 
-        while (flag == 0) {
+        while (true) {
 			Console.Clear();
-			
-			Console.WriteLine("Player1:X and Player2:O");
+            Console.WriteLine("Player1: {0} and Player2: {1}", _playerSymbols[0], _playerSymbols[1]);
 			Console.WriteLine();
-			if (_currentPlayer == 0) {
-				Console.WriteLine("Player 1 Chance");
-			} else {
-				Console.WriteLine("Player 2 Chance");
-			}
+            Console.WriteLine("Player {0}'s turn", _currentPlayer + 1);
 			Console.WriteLine();
+
 			DrawBoard(_board);
+            
 			var choice = int.Parse(Console.ReadLine());
-			
 			while (choice > 9 || choice < 0) {
 				Console.WriteLine("That is an invalid number, please try again: ");
 				choice = int.Parse(Console.ReadLine());
 			}
-			
-			if (_board[choice] != 'X' && _board[choice] != 'O') {
+			if (!_playerSymbols.Contains(_board[choice])) {
 				_board[choice] = _playerSymbols[_currentPlayer];
 			} else {
 				Console.WriteLine("Sorry the row {0} is already marked with {1}", choice, _board[choice]);
