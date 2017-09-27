@@ -1,7 +1,0 @@
-E:\$\TicTacToe\TicTacToe\bin\Debug\TicTacToe.exe.config
-D:\$\TicTacToe\TicTacToe\bin\Debug\TicTacToe.exe.config
-D:\$\TicTacToe\TicTacToe\bin\Debug\TicTacToe.exe
-D:\$\TicTacToe\TicTacToe\bin\Debug\TicTacToe.pdb
-D:\$\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csprojResolveAssemblyReference.cache
-D:\$\TicTacToe\TicTacToe\obj\Debug\TicTacToe.exe
-D:\$\TicTacToe\TicTacToe\obj\Debug\TicTacToe.pdb
